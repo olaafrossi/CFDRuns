@@ -25,44 +25,72 @@ boundaryField
     {
         type            symmetry;
     }
-
     outlet
     {
         type            calculated;
         value           uniform 1500;
     }
-
     upperWall
     {
         type            calculated;
         value           uniform 1500;
     }
-
     inlet
     {
         type            calculated;
         value           uniform 1500;
     }
-
     left
     {
         type            calculated;
         value           uniform 1500;
     }
-
     lowerWall
     {
         type            calculated;
         value           uniform 1500;
     }
-
-    carGroup
+    CarBody_wall
     {
         type            calculated;
         value           uniform 0;
     }
-
-    tireGroup
+    Splitter_wall
+    {
+        type            calculated;
+        value           uniform 0;
+    }
+    Wing_wall
+    {
+        type            calculated;
+        value           uniform 0;
+    }
+    Upright_wall
+    {
+        type            calculated;
+        value           uniform 0;
+    }
+    RadBody_wall
+    {
+        type            calculated;
+        value           uniform 0;
+    }
+    FRTire_wall
+    {
+        type            calculated;
+        value           uniform 0;
+    }
+    FRPlinth_wall
+    {
+        type            calculated;
+        value           uniform 0;
+    }
+    RRTire_wall
+    {
+        type            calculated;
+        value           uniform 0;
+    }
+    RRPlinth_wall
     {
         type            calculated;
         value           uniform 0;

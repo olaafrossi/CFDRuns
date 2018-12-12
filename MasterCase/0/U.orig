@@ -51,7 +51,7 @@ boundaryField
         type            rotatingWallVelocity;
         origin             (0 0 0);
         axis               (0 1 0);
-        omega              -104.72;
+        omega              0; //-104.72;
         value              uniform (0 0 0); 
     }
 
@@ -60,7 +60,7 @@ boundaryField
         type            rotatingWallVelocity;
         origin             (0 0 0);
         axis               (0 1 0);
-        omega              -104.72;
+        omega              0; //-104.72;
         value              uniform (0 0 0); 
     }
 
