@@ -1,0 +1,137 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  6
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volVectorField;
+    location    "0";
+    object      U;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+#include        "include/initialConditions"
+
+dimensions      [0 1 -1 0 0 0 0];
+
+internalField   uniform $flowVelocity;
+
+boundaryField
+{
+    //- Set patchGroups for constraint patches
+    #includeEtc "caseDicts/setConstraintTypes"
+
+    #include "include/fixedInlet"
+
+    outlet
+    {
+        type            inletOutlet;
+        inletValue      uniform (0 0 0);
+        value           $internalField;
+    }
+
+    lowerWall
+    {
+        type            fixedValue;
+        value           $internalField;
+    }
+
+    upperWall
+    {
+        type            slip;
+    }
+
+    tire_wall
+    {
+        type            rotatingWallVelocity;
+        origin             (0 0 0);
+        axis               (0 1 0);
+        omega              -104.72;
+        value              uniform (0 0 0); 
+    }
+
+    rim_wall
+    {
+        type            noSlip;
+    }
+
+    plane_wall
+    {
+        type            noSlip;
+    }
+
+    rad_wall
+    {
+        type            noSlip;
+    }
+    
+    symWall
+    {
+        type           symmetry;
+    }
+    
+    left
+    {
+        type           slip;
+    }
+/*
+    FRTire_wall
+    {
+        type            rotatingWallVelocity;
+        origin          (-0.965 0.293 1.21); //height from floor to center of wheel-0.965 0.293 1.21
+        axis            (0 1 0);
+        omega           -65.484;
+        value           uniform (0 0 0); 
+    //Parameter omega is angle velocity in radians per second (RPM/60)*2*PI=rPs
+    //for 20/msec 20 * 60 is 1,200m/min
+    //circum of our wheel+tire!!! is 1.918
+    //revolutions per minute = speed in meters per minute / circumference in meters.
+    //1,200 / 1.918 = 625.651 RPM
+    //(RPM/60)*2*PI=rPs = 65.484
+    }
+
+    RRTire_wall
+    {
+        type            rotatingWallVelocity;
+        origin          (1.224 0.293 1.21);
+        axis            (0 1 0);
+        omega           -65.484;
+        value           uniform (0 0 0); 
+    } 
+   FrontMRF_zone
+    {
+        type           slip;
+    }
+    RearMRF_zone
+    {
+        type           slip;
+    }
+ //    MRF1Box
+ //   {
+ //       type            fixedValue;
+ //       value           uniform (0 0 0);
+  //  }   
+    /*
+    RRWheel_wall
+    {
+        type            rotatingWallVelocity;
+        origin          (0 0 0);
+        axis            (0 1 0);
+        omega          -62.8; // 600 RPM,   (RPM/60)*2*PI=rPs
+    } 
+      FRWheel_wall
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);
+    } 
+    */ 
+   // #include "include/frontBackUpperPatches"
+}
+
+
+// ************************************************************************* //
