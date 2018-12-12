@@ -46,7 +46,7 @@ boundaryField
         type            slip;
     }
 
-    tire_wall
+    FRTire_wall
     {
         type            rotatingWallVelocity;
         origin             (0 0 0);
@@ -55,17 +55,16 @@ boundaryField
         value              uniform (0 0 0); 
     }
 
-    rim_wall
+    RRTire_wall
     {
-        type            noSlip;
+        type            rotatingWallVelocity;
+        origin             (0 0 0);
+        axis               (0 1 0);
+        omega              -104.72;
+        value              uniform (0 0 0); 
     }
 
-    plane_wall
-    {
-        type            noSlip;
-    }
-
-    rad_wall
+    carGroup
     {
         type            noSlip;
     }

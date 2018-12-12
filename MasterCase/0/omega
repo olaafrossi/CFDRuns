@@ -45,25 +45,13 @@ boundaryField
         type            zeroGradient;
     }
 
-    tire_wall
+    carGroup
     {
         type            omegaWallFunction;
         value           $internalField;
     }
     
-    rim_wall
-    {
-        type            omegaWallFunction;
-        value           $internalField;
-    }
-
-    plane_wall
-    {
-        type            omegaWallFunction;
-        value           $internalField;
-    }
-
-    rad_wall
+    tireGroup
     {
         type            omegaWallFunction;
         value           $internalField;

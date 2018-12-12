@@ -21,47 +21,77 @@ addLayers       false;
 
 geometry
 {
-    Wheel.stl
+    CarBody.stl
     {
         type triSurfaceMesh;
-        name racecar;
-
-        regions
-        {
-            Tire
-            {
-                name tire_wall;
-            }
-            Rim
-            {
-                name rim_wall;
-            }
-        }
+        name CarBody_wall;
     }
 
-    RadTest.stl
+    Splitter.stl
     {
         type triSurfaceMesh;
-        name radd;
-
-        regions
-        {
-            Plane
-            {
-                name plane_wall;
-            }
-            Rad
-            {
-                name rad_wall;
-            }
-        }
+        name Splitter_wall;
     }
 
-    Plug.stl
+    Wing.stl
     {
         type triSurfaceMesh;
-        name rotatingZone;
+        name Wing_wall;
     }
+
+    Upright.stl
+    {
+        type triSurfaceMesh;
+        name Upright_wall;
+    }
+
+    RadBody.stl
+    {
+        type triSurfaceMesh;
+        name RadBody_wall;
+    }    
+
+    FRTire.stl
+    {
+        type triSurfaceMesh;
+        name FRTire_wall;
+    }
+
+    FRPlinth.stl
+    {
+        type triSurfaceMesh;
+        name FRPlinth_wall;
+    }
+
+    RRTire.stl
+    {
+        type triSurfaceMesh;
+        name RRTire_wall;
+    }
+
+    RRPlinth.stl
+    {
+        type triSurfaceMesh;
+        name RRPlinth_wall;
+    }
+
+    FrontPlug.stl
+    {
+        type triSurfaceMesh;
+        name rotatingZoneFront;
+    }
+
+    RearPlug.stl
+    {
+        type triSurfaceMesh;
+        name rotatingZoneRear;
+    }
+
+    RadSurface.stl
+    {
+        type triSurfaceMesh;
+        name RadSurface_wall;
+    }  
 
     LevelsrefinementBox
     {
@@ -69,13 +99,14 @@ geometry
         min (-1.0 0.0 -1.0);
         max ( 1.0 1.0 1.0);
     }
-
-    heatExchanger
+/*
+    heatExchangerBox
     {
         type searchableBox;
         min (-1.22 0.00 1.02);
         max (-0.98 0.48 1.08);
     }
+*/
 }
 // Settings for the castellatedMesh generation.
 castellatedMeshControls
@@ -92,86 +123,178 @@ castellatedMeshControls
     features
     (
         {
-            file "Wheel.eMesh";
+            file "CarBody.eMesh";
             level 6;
         }
 
         {
-            file "RadTest.eMesh";
+            file "Splitter.eMesh";
             level 6;
         }
 
-        //{
-          //  file "Plug.eMesh";
-           // level 6;
-       // }
+        {
+            file "Wing.eMesh";
+            level 6;
+        }
+
+        {
+            file "Upright.eMesh";
+            level 6;
+        }
+
+        {
+            file "RadBody.eMesh";
+            level 6;
+        }
+
+        {
+            file "RadSurface.eMesh";
+            level 6;
+        }
+
+        {
+            file "FRTire.eMesh";
+            level 6;
+        }
+
+        {
+            file "FRPlinth.eMesh";
+            level 6;
+        }
+
+        {
+            file "RRTire.eMesh";
+            level 6;
+        }
+
+        {
+            file "RRPlinth.eMesh";
+            level 6;
+        }
+
+        {
+            file "FrontPlug.eMesh";
+            level 6;
+        }
+
+        {
+            file "RearPlug.eMesh";
+            level 6;
+        }
     );
      refinementSurfaces
     {
-        racecar
+        CarBody_wall
         {
             level (2 3); //this is the global refinement of the STL geo
-            regions
+            patchInfo
             {
-                tire_wall
-                {
-                    level (5 6);
-                    patchInfo
-                    {
-                        type wall;
-                        //inGroups (carGroup);
-                    }                                 
-                }
-                rim_wall
-                {
-                    level (5 6);
-                    patchInfo
-                    {
-                        type wall;
-                        //inGroups (carGroup);
-                    }                                 
-                }                                 
-            }
+                type wall;
+                inGroups (carGroup);
+            }                                 
         }
 
-        radd
+        Splitter_wall
         {
             level (2 3); //this is the global refinement of the STL geo
-            regions
+            patchInfo
             {
-                plane_wall
-                {
-                    level (5 6);
-                    patchInfo
-                    {
-                        type wall;
-                        //inGroups (carGroup);
-                    }                                 
-                }
-                rad_wall
-                {
-                    level (7 7); 
-                    patchInfo
-                    {
-                        type wall;
-                        //inGroups (carGroup);
-                    }                                 
-                }   
-            }
-        }
+                type wall;
+                inGroups (carGroup);
+            }                                 
+        } 
 
-        heatExchanger
+        Wing_wall
+        {
+            level (2 3); //this is the global refinement of the STL geo
+            patchInfo
+            {
+                type wall;
+                inGroups (carGroup);
+            }                                 
+        }     
+
+        Upright_wall
+        {
+            level (2 3); //this is the global refinement of the STL geo
+            patchInfo
+            {
+                type wall;
+                inGroups (carGroup);
+            }                                 
+        } 
+
+        RadBody_wall
+        {
+            level (2 3); //this is the global refinement of the STL geo
+            patchInfo
+            {
+                type wall;
+                inGroups (carGroup);
+            }                                 
+        }    
+
+        FRPlinth_wall
+        {
+            level (2 3); //this is the global refinement of the STL geo
+            patchInfo
+            {
+                type wall;
+                inGroups (carGroup);
+            }                                 
+        } 
+
+        RRPlinth_wall
+        {
+            level (2 3); //this is the global refinement of the STL geo
+            patchInfo
+            {
+                type wall;
+                inGroups (carGroup);
+            }                                 
+        } 
+
+        FRTire_wall
+        {
+            level (2 3); //this is the global refinement of the STL geo
+            patchInfo
+            {
+                type wall;
+                inGroups (tireGroup);
+            }                                 
+        } 
+
+        RRTire_wall
+        {
+            level (2 3); //this is the global refinement of the STL geo
+            patchInfo
+            {
+                type wall;
+                inGroups (tireGroup);
+            }                                 
+        } 
+
+        RadSurface_wall
         {
             level (7 7);
             cellZone heatExchanger;
             faceZone heatExchangerf;
+            cellZoneInside  inside; 
         }
         
-        rotatingZone
+        rotatingZoneFront
         {
             level       (8 8);
-            faceZone    rotatingZone;
-            cellZone    rotatingZone;
+            faceZone    rotatingZoneFront;
+            cellZone    rotatingZoneFront;
+            cellZoneInside  inside;                             
+        }  
+
+        rotatingZoneRear
+        {
+            level       (8 8);
+            faceZone    rotatingZoneRear;
+            cellZone    rotatingZoneRear;
             cellZoneInside  inside;                             
         }  
     }                            
@@ -186,28 +309,28 @@ refinementRegions
             levels ((1E15 2));
         }
 
-        racecar
+        carGroup
         {
             mode distance;
             levels ((.25 4) (.5 3) (.75 2)); // levels must be ordered nearest first
         }    
 
-        radd
-        {
-            mode distance;
-            levels ((.25 4) (.5 3) (.75 2)); // levels must be ordered nearest first
-        }  
-
-        rotatingZone
+        rotatingZoneFront
         {
             mode inside;
             levels ((1E15 4));
-        }   
+        }  
+
+        rotatingZoneRear
+        {
+            mode inside;
+            levels ((1E15 4));
+        }           
     }
 /////////////////////////////////////////////////////////////////////////////////////////////////////
     // Mesh selection
     // ~~~~~~~~~~~~~~
-    locationInMesh (1.9001 1.9001 0.43);
+    locationInMesh (3.9001 3.9001 0.43);
     allowFreeStandingZoneFaces true;
 }
 

@@ -25,47 +25,44 @@ boundaryField
     {
         type            symmetry;
     }
+
     outlet
     {
         type            calculated;
         value           uniform 1500;
     }
+
     upperWall
     {
         type            calculated;
         value           uniform 1500;
     }
+
     inlet
     {
         type            calculated;
         value           uniform 1500;
     }
+
     left
     {
         type            calculated;
         value           uniform 1500;
     }
+
     lowerWall
     {
         type            calculated;
         value           uniform 1500;
     }
-    tire_wall
+
+    carGroup
     {
         type            calculated;
         value           uniform 0;
     }
-    rim_wall
-    {
-        type            calculated;
-        value           uniform 0;
-    }
-    plane_wall
-    {
-        type            calculated;
-        value           uniform 0;
-    }
-    rad_wall
+
+    tireGroup
     {
         type            calculated;
         value           uniform 0;

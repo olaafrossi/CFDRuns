@@ -46,22 +46,12 @@ boundaryField
         type            zeroGradient;
     }
 
-    tire_wall
+    carGroup
     {
         type            zeroGradient;
     }
 
-    rim_wall
-    {
-        type            zeroGradient;
-    }
-
-    plane_wall
-    {
-        type            zeroGradient;
-    }
-
-    rad_wall
+    tireGroup
     {
         type            zeroGradient;
     }

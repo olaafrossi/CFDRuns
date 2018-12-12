@@ -17,7 +17,19 @@ FoamFile
 
 MRF1
 {
-    cellZone    rotatingZone;
+    cellZone    rotatingZoneFront;
+    active      yes;
+
+    // Fixed patches (by default they 'move' with the MRF zone)
+    nonRotatingPatches ();
+
+    origin    (0 0 0);
+    axis      (0 1 0);
+    omega     -104.72;
+}
+MRF2
+{
+    cellZone    rotatingZoneRear;
     active      yes;
 
     // Fixed patches (by default they 'move' with the MRF zone)

@@ -59,30 +59,17 @@ boundaryField
         value           uniform 0;
     }
 
-    tire_wall
+    carGroup
     {
         type            nutkWallFunction;
         value           uniform 0;
     }
 
-    rim_wall
+    tireGroup
     {
         type            nutkWallFunction;
         value           uniform 0;
     }
-
-    plane_wall
-    {
-        type            nutkWallFunction;
-        value           uniform 0;
-    }
-    
-    rad_wall
-    {
-        type            nutkWallFunction;
-        value           uniform 0;
-    }
-
 }
 
 
