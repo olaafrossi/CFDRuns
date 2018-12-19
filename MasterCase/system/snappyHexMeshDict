@@ -17,7 +17,7 @@ FoamFile
 // Which of the steps to run
 castellatedMesh true;
 snap            true;
-addLayers       false;
+addLayers       true;
 
 geometry
 {
@@ -93,12 +93,27 @@ geometry
         name RadSurface_wall;
     }  
 
-    LevelsrefinementBox
+    FinerefinementBox
     {
         type searchableBox;
-        min (-6.0 0.0  0.0);
-        max ( 10.0 4.0 4.0);
+        min (-3.0 0.0 0.0);
+        max (7.0 2.0 2.0);
     }
+
+    FloorBox
+    {
+        type searchableBox;
+        min (-10.0 0.0 0.0); //for mini tunnel
+        max ( 20.0 8.0 1.0);
+    } 
+
+    FineFloorBox
+    {
+        type searchableBox;
+        min (-3.0 0.0 0.0);
+        max (7.0 2.0 0.0625);
+    }    
+       
 /*
     heatExchangerBox
     {
@@ -113,80 +128,97 @@ castellatedMeshControls
 {
     // Refinement parameters
     // ~~~~~~~~~~~~~~~~~~~~~
-    maxLocalCells  2500000;
-    maxGlobalCells 10000000;
-    minRefinementCells 10;
-    maxLoadUnbalance 0.10;
-    nCellsBetweenLevels 1;
+    maxLocalCells  1500000;
+    maxGlobalCells 30000000;
+    minRefinementCells 5; //stock is 10
+    maxLoadUnbalance 0.05; //stock is .10
+    nCellsBetweenLevels 5; //stock is 3
     // Explicit feature edge refinement
     // Specifies a level for any cell intersected by its edges.
     features
     (
         {
             file "CarBody.eMesh";
-            level 6;
+            level 9;
         }
 
         {
             file "Splitter.eMesh";
-            level 6;
+            level 9;
         }
 
         {
             file "Wing.eMesh";
-            level 6;
+            level 9;
         }
 
         {
             file "Upright.eMesh";
-            level 6;
+            level 9;
         }
 
         {
             file "RadBody.eMesh";
-            level 6;
+            level 9;
         }
 
         {
             file "RadSurface.eMesh";
-            level 6;
+            level 9;
         }
 
         {
             file "FRTire.eMesh";
-            level 6;
+            level 9;
         }
 
         {
             file "FRPlinth.eMesh";
-            level 6;
+            level 9;
         }
 
         {
             file "RRTire.eMesh";
-            level 6;
+            level 9;
         }
 
         {
             file "RRPlinth.eMesh";
-            level 6;
+            level 9;
         }
 
         {
             file "FrontPlug.eMesh";
-            level 6;
+            level 9;
         }
 
         {
             file "RearPlug.eMesh";
-            level 6;
+            level 9;
         }
     );
      refinementSurfaces
+
+/*cellsize calc:
+1 meter block
+
+refine level 1= .5m
+refine level 2= .25m
+refine level 3= .125m
+refine level 4= .0625m
+refine level 5= .03125m
+refine level 6= .015625m
+refine level 7= .0078125m
+refine level 8= .00390625m
+refine level 9= .001953125m
+refine level 10= .0009765625m
+
+*/
+
     {
         CarBody_wall
         {
-            level (2 3); //this is the global refinement of the STL geo
+            level (7 8); //this is the global refinement of the STL geo
             patchInfo
             {
                 type wall;
@@ -196,7 +228,7 @@ castellatedMeshControls
 
         Splitter_wall
         {
-            level (2 3); //this is the global refinement of the STL geo
+            level (8 8); //this is the global refinement of the STL geo
             patchInfo
             {
                 type wall;
@@ -206,7 +238,7 @@ castellatedMeshControls
 
         Wing_wall
         {
-            level (2 3); //this is the global refinement of the STL geo
+            level (8 8); //this is the global refinement of the STL geo
             patchInfo
             {
                 type wall;
@@ -216,7 +248,7 @@ castellatedMeshControls
 
         Upright_wall
         {
-            level (2 3); //this is the global refinement of the STL geo
+            level (8 8); //this is the global refinement of the STL geo
             patchInfo
             {
                 type wall;
@@ -226,7 +258,7 @@ castellatedMeshControls
 
         RadBody_wall
         {
-            level (2 3); //this is the global refinement of the STL geo
+            level (6 7); //this is the global refinement of the STL geo
             patchInfo
             {
                 type wall;
@@ -236,7 +268,7 @@ castellatedMeshControls
 
         FRPlinth_wall
         {
-            level (2 3); //this is the global refinement of the STL geo
+            level (9 9); //this is the global refinement of the STL geo
             patchInfo
             {
                 type wall;
@@ -246,7 +278,7 @@ castellatedMeshControls
 
         RRPlinth_wall
         {
-            level (2 3); //this is the global refinement of the STL geo
+            level (9 9); //this is the global refinement of the STL geo
             patchInfo
             {
                 type wall;
@@ -256,7 +288,7 @@ castellatedMeshControls
 
         FRTire_wall
         {
-            level (2 3); //this is the global refinement of the STL geo
+            level (7 8); //this is the global refinement of the STL geo
             patchInfo
             {
                 type wall;
@@ -266,7 +298,7 @@ castellatedMeshControls
 
         RRTire_wall
         {
-            level (2 3); //this is the global refinement of the STL geo
+            level (7 8); //this is the global refinement of the STL geo
             patchInfo
             {
                 type wall;
@@ -299,20 +331,32 @@ castellatedMeshControls
         }  
     }                            
     // Resolve sharp angles
-    resolveFeatureAngle 10;
+    resolveFeatureAngle 1; //30 is stock, lets try 1
     // Region-wise refinement
 refinementRegions
     {
-        LevelsrefinementBox
+        FloorBox
         {
             mode inside;
-            levels ((1E15 2));
+            levels ((1E15 1));
+        }
+
+        FineFloorBox
+        {
+            mode inside;
+            levels ((1E15 6));
+        }
+                
+        FinerefinementBox
+        {
+            mode inside;
+            levels ((1E15 5));
         }
 
         CarBody_wall
         {
             mode distance;
-            levels ((.25 4) (.5 3) (.75 2)); // levels must be ordered nearest first
+            levels ((.25 5) (.5 4) (.75 3)); // levels must be ordered nearest first
         }    
 
         rotatingZoneFront
@@ -337,50 +381,65 @@ refinementRegions
 // Settings for the snapping.
 snapControls
 {
-    nSmoothPatch 3;
-    tolerance 2.0;
-    nSolveIter 30; // 30 is stock 300 from wolf dynamics
-    nRelaxIter 5;
+    nSmoothPatch 5; //3 is stock, 5 reccomended from Simscale
+    tolerance 5.0; //2.0 is stock, 5 reccomended from Simscale
+    nSolveIter 400; // 30 is stock 300 from wolf dynamics
+    nRelaxIter 12; //simscale says 5-8
     nFeatureSnapIter 20; //10 is stock 20 from wolf
     implicitFeatureSnap false;
-    explicitFeatureSnap true;
-    multiRegionFeatureSnap false;
+    explicitFeatureSnap true; //this will snap to the surface feature extract
+    multiRegionFeatureSnap true; //stock is flase
 }
 
-// Settings for the layer addition.
 addLayersControls
 {
     relativeSizes true;
-    nSurfaceLayers 1;
+    nSurfaceLayers 3;
     expansionRatio 1.2;
-    finalLayerThickness 0.7;
-    //firstLayerThickness 0.1;
+    finalLayerThickness 0.3;
+    //firstLayerThickness 0.001;
     //thickness 0.6;
-    minThickness 0.1;
+    minThickness 0.01;
+    
     // Per final patch (so not geometry!) the layer information
+    //https://en.wikipedia.org/wiki/Law_of_the_wall
     layers
     {
+        "(carGroup).*"
+        {
+            nSurfaceLayers 4;
+            //expansionRatio 1.3;
+            //finalLayerThickness 0.3;
+            //minThickness 0.001;
+        }
+        "(tireGroup).*"
+        {
+            nSurfaceLayers 4;
+            //expansionRatio 1.3;
+            //finalLayerThickness 0.3;
+            //minThickness 0.001;
+        }
         lowerWall
         {
             nSurfaceLayers 3;
-            expansionRatio 1.3;
-            finalLayerThickness 0.3;
-            minThickness 0.001;
+            //expansionRatio 1.3;
+            //finalLayerThickness 0.3;
+            //minThickness 0.002;
         }
     }
     nGrow 0;
-    featureAngle 330; //180 is stock 330 from wolf
+    featureAngle 180; //180 is stock 130 from wolf try 1 from intel
     slipFeatureAngle 75; //75 stock 30 from wolf
     nRelaxIter 10; //8 is stock 10 from wolf
-    nSmoothSurfaceNormals 1;
+    nSmoothSurfaceNormals 5; //1 is stock
     nSmoothNormals 10; //5 is stock, 10 from wolf
     nSmoothThickness 10;
     maxFaceThicknessRatio 0.5;
-    maxThicknessToMedialRatio 0.3; //.35 stock .3 from wolf
-    minMedianAxisAngle 130; //90 is stock
-    minMedialAxisAngle 130; //90 is stock
+    maxThicknessToMedialRatio 1.0; //.35 stock .3 from wolf //1 from intel
+    minMedianAxisAngle 90; //90 is stock
+    minMedialAxisAngle 90; //90 is stock
     nBufferCellsNoExtrude 0;
-    nLayerIter 50;
+    nLayerIter 90; //50 is stock //90 wolf
 }
 
 meshQualityControls

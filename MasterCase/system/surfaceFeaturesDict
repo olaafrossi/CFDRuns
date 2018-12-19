@@ -32,7 +32,7 @@ surfaces
 );
 
 // Identify a feature when angle between faces < includedAngle
-includedAngle       150;
+includedAngle       165;
 
 subsetFeatures
 {

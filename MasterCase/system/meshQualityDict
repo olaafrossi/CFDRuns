@@ -15,10 +15,10 @@ FoamFile
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 //- Maximum non-orthogonality allowed. Set to 180 to disable.
-maxNonOrtho 65; //75 from wolf higher is better quality, but slower
+maxNonOrtho 55;
 
 //- Max skewness allowed. Set to <0 to disable.
-maxBoundarySkewness 4; //20 was stock
+maxBoundarySkewness 4;
 maxInternalSkewness 4;
 
 //- Max concaveness allowed. Is angle (in degrees) below which concavity
@@ -76,9 +76,6 @@ errorReduction 0.75;
 //  minVolCollapseRatio times old volume (i.e. not collapsed to flat cell).
 //  If <0 : delete always.
 //minVolCollapseRatio 0.1;
-
-//- minFaceWeight (0 -> 0.5)
-minFaceWeight 0.02;
 
 
 // ************************************************************************* //

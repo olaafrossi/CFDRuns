@@ -22,8 +22,8 @@ solvers
         smoother        GaussSeidel;
         tolerance       1e-8;
         relTol          0.001;
-        nPreSweeps      0; // number of sweeps as the algorithm is coarsening (default 0).
-        nPostSweeps     2; //number of sweeps as the algorithm is refining (default 2).
+        nPreSweeps      2; // number of sweeps as the algorithm is coarsening (default 0).
+        nPostSweeps     6; //number of sweeps as the algorithm is refining (default 2).
         cacheAgglomeration  on;
         agglomerator        faceAreaPair;
         nCellsInCoarsestLevel 1000;
@@ -48,9 +48,9 @@ solvers
     {
         solver          smoothSolver;
         smoother        symGaussSeidel;
-        tolerance       1e-7;
+        tolerance       1e-8;
         relTol          0.01;
-        nSweeps         1;
+        nSweeps         2;
     }
 
     k
@@ -74,7 +74,7 @@ solvers
 
 SIMPLE
 {
-    nNonOrthogonalCorrectors 2; //wolf says to always use 2, or 1 if too slow
+    nNonOrthogonalCorrectors 1; //wolf says to always use 2, or 1 if too slow
     consistent yes;
 }
 
@@ -100,3 +100,4 @@ cache
 }
 
 // ************************************************************************* //
+
