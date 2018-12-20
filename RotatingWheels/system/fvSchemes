@@ -1,0 +1,57 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  6
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      fvSchemes;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+//Defaut Hi Res
+
+ddtSchemes
+{
+    default         steadyState;
+}
+
+gradSchemes
+{
+    default         Gauss linear;
+    grad(U)         cellLimited Gauss linear 1; //linear upwind //look at TVD and NVD schemes //try default
+}
+
+divSchemes //foamSearch -c $FOAM_TUTORIALS "divScemes.div(phi,k)" fvScheme
+{
+    default         none; //try Gauss linear corrected
+    div(phi,U)      bounded Gauss upwind; //wolf uses bounded Gauss linearUpwind Grad(U)); //try Gauss linear corrected
+    div(phi,k)      bounded Gauss upwind; //try Gauss linear corrected
+    div(phi,omega)  bounded Gauss upwind; //try Gauss linear corrected
+    div((nuEff*dev2(T(grad(U))))) Gauss linear; //same as wolf
+}
+
+laplacianSchemes
+{
+    default         Gauss linear limited corrected 1;
+}
+
+interpolationSchemes
+{
+    default         linear;
+}
+
+snGradSchemes
+{
+    default         corrected;
+}
+
+wallDist
+{
+    method meshWave;
+}
+

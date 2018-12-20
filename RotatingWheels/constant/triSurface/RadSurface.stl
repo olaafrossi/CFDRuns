@@ -1,0 +1,86 @@
+solid RadSurface
+  facet normal 1.000000e+00 -0.000000e+00 0.000000e+00
+    outer loop
+      vertex   -1.840000e+00 -2.352246e-01 5.602246e-01
+      vertex   -1.840000e+00 -2.352246e-01 3.397754e-01
+      vertex   -1.840000e+00 2.352246e-01 5.602246e-01
+    endloop
+  endfacet
+  facet normal 1.000000e+00 0.000000e+00 0.000000e+00
+    outer loop
+      vertex   -1.840000e+00 2.352246e-01 5.602246e-01
+      vertex   -1.840000e+00 -2.352246e-01 3.397754e-01
+      vertex   -1.840000e+00 2.352246e-01 3.397754e-01
+    endloop
+  endfacet
+  facet normal 0.000000e+00 -1.000000e+00 0.000000e+00
+    outer loop
+      vertex   -1.960000e+00 -2.352246e-01 5.602246e-01
+      vertex   -1.960000e+00 -2.352246e-01 3.397754e-01
+      vertex   -1.840000e+00 -2.352246e-01 5.602246e-01
+    endloop
+  endfacet
+  facet normal 0.000000e+00 -1.000000e+00 -0.000000e+00
+    outer loop
+      vertex   -1.840000e+00 -2.352246e-01 5.602246e-01
+      vertex   -1.960000e+00 -2.352246e-01 3.397754e-01
+      vertex   -1.840000e+00 -2.352246e-01 3.397754e-01
+    endloop
+  endfacet
+  facet normal 0.000000e+00 0.000000e+00 -1.000000e+00
+    outer loop
+      vertex   -1.960000e+00 -2.352246e-01 3.397754e-01
+      vertex   -1.960000e+00 2.352246e-01 3.397754e-01
+      vertex   -1.840000e+00 -2.352246e-01 3.397754e-01
+    endloop
+  endfacet
+  facet normal 0.000000e+00 0.000000e+00 -1.000000e+00
+    outer loop
+      vertex   -1.840000e+00 -2.352246e-01 3.397754e-01
+      vertex   -1.960000e+00 2.352246e-01 3.397754e-01
+      vertex   -1.840000e+00 2.352246e-01 3.397754e-01
+    endloop
+  endfacet
+  facet normal 0.000000e+00 1.000000e+00 0.000000e+00
+    outer loop
+      vertex   -1.960000e+00 2.352246e-01 3.397754e-01
+      vertex   -1.960000e+00 2.352246e-01 5.602246e-01
+      vertex   -1.840000e+00 2.352246e-01 3.397754e-01
+    endloop
+  endfacet
+  facet normal 0.000000e+00 1.000000e+00 -0.000000e+00
+    outer loop
+      vertex   -1.840000e+00 2.352246e-01 3.397754e-01
+      vertex   -1.960000e+00 2.352246e-01 5.602246e-01
+      vertex   -1.840000e+00 2.352246e-01 5.602246e-01
+    endloop
+  endfacet
+  facet normal -0.000000e+00 0.000000e+00 1.000000e+00
+    outer loop
+      vertex   -1.960000e+00 2.352246e-01 5.602246e-01
+      vertex   -1.960000e+00 -2.352246e-01 5.602246e-01
+      vertex   -1.840000e+00 2.352246e-01 5.602246e-01
+    endloop
+  endfacet
+  facet normal 0.000000e+00 0.000000e+00 1.000000e+00
+    outer loop
+      vertex   -1.840000e+00 2.352246e-01 5.602246e-01
+      vertex   -1.960000e+00 -2.352246e-01 5.602246e-01
+      vertex   -1.840000e+00 -2.352246e-01 5.602246e-01
+    endloop
+  endfacet
+  facet normal -1.000000e+00 -0.000000e+00 -0.000000e+00
+    outer loop
+      vertex   -1.960000e+00 2.352246e-01 5.602246e-01
+      vertex   -1.960000e+00 2.352246e-01 3.397754e-01
+      vertex   -1.960000e+00 -2.352246e-01 5.602246e-01
+    endloop
+  endfacet
+  facet normal -1.000000e+00 0.000000e+00 0.000000e+00
+    outer loop
+      vertex   -1.960000e+00 -2.352246e-01 5.602246e-01
+      vertex   -1.960000e+00 2.352246e-01 3.397754e-01
+      vertex   -1.960000e+00 -2.352246e-01 3.397754e-01
+    endloop
+  endfacet
+endsolid RadSurface
