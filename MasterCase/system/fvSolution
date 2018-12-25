@@ -86,6 +86,7 @@ SIMPLE
     }
     nNonOrthogonalCorrectors 0;
     pRefCell 0;
+    //consistent yes;
 }
 
 potentialFlow
