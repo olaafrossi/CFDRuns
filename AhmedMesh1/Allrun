@@ -1,0 +1,38 @@
+#!/bin/sh
+cd ${0%/*} || exit 1    # Run from this directory
+
+# Source run functions
+. $WM_PROJECT_DIR/bin/tools/RunFunctions
+
+mkdir ParaPostPro/ISO
+mkdir ParaPostPro/p
+mkdir ParaPostPro/tp
+mkdir ParaPostPro/u
+mkdir ParaPostPro/mesh
+runApplication surfaceFeatures
+runApplication blockMesh
+runApplication decomposePar -copyZero
+runParallel snappyHexMesh -overwrite
+runParallel patchSummary
+runParallel potentialFoam
+runParallel $(getApplication)
+runApplication reconstructParMesh -constant
+runApplication reconstructPar -latestTime
+runApplication postProcess -func "totalPressureIncompressible(p,U)"
+runApplication paraFoam --script=ParaPostPro/Macros/Iso.py
+rm log.paraFoam
+runApplication paraFoam --script=ParaPostPro/Macros/Mesh.py
+rm log.paraFoam
+runApplication paraFoam --script=ParaPostPro/Macros/Yslices3.py
+rm log.paraFoam
+runApplication paraFoam --script=ParaPostPro/Macros/Zslices3.py
+rm log.paraFoam
+runApplication paraFoam --script=ParaPostPro/Macros/Xslices3.py
+#foamToVTK -latestTime
+#mv VTK ParaPostPro
+#cp -r postProcessing ParaPostPro
+#cp log.simpleFoam ParaPostPro
+#cp -r ParaPostPro/ ~/Dropbox/CFD/foamCASES/Current
+checkMesh -allTopology -allGeometry
+
+#------------------------------------------------------------------------------

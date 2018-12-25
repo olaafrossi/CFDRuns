@@ -1,0 +1,210 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  6
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+
+RRPlinth_wall
+{
+    type            forceCoeffs;
+    libs            ("libforces.so");
+    writeControl    timeStep;
+    timeInterval    1;
+    log             yes;
+    patches         (RRPlinth_wall);
+    rho             rhoInf;      // Indicates incompressible
+    rhoInf          1;           // Redundant for incompressible
+    liftDir         (0 0 1);
+    dragDir         (1 0 0);
+    CofR            (0 0 0);  // Axle midpoint on ground MUSTANG S197
+    pitchAxis       (0 1 0);
+    magUInf         50;
+    lRef            2.189;        // Wheelbase Araba
+    Aref            1.8;        // Frontal Area
+    porosity        no;
+}
+
+FRPlinth_wall
+{
+    type            forceCoeffs;
+    libs            ("libforces.so");
+    writeControl    timeStep;
+    timeInterval    1;
+    log             yes;
+    patches         (FRPlinth_wall);
+    rho             rhoInf;      // Indicates incompressible
+    rhoInf          1;           // Redundant for incompressible
+    liftDir         (0 0 1);
+    dragDir         (1 0 0);
+    CofR            (0 0 0);  // Axle midpoint on ground MUSTANG S197
+    pitchAxis       (0 1 0);
+    magUInf         50;
+    lRef            2.189;        // Wheelbase Araba
+    Aref            1.8;        // Frontal Area
+    porosity        no;
+}
+
+FRTire_wall
+{
+    type            forceCoeffs;
+    libs            ("libforces.so");
+    writeControl    timeStep;
+    timeInterval    1;
+    log             yes;
+    patches         (FRTire_wall);
+    rho             rhoInf;      // Indicates incompressible
+    rhoInf          1;           // Redundant for incompressible
+    liftDir         (0 0 1);
+    dragDir         (1 0 0);
+    CofR            (0 0 0);  // Axle midpoint on ground MUSTANG S197
+    pitchAxis       (0 1 0);
+    magUInf         50;
+    lRef            2.189;        // Wheelbase Araba
+    Aref            1.8;        // Frontal Area
+    porosity        no;
+}
+
+RRTire_wall
+{
+    type            forceCoeffs;
+    libs            ("libforces.so");
+    writeControl    timeStep;
+    timeInterval    1;
+    log             yes;
+    patches         (RRTire_wall);
+    rho             rhoInf;      // Indicates incompressible
+    rhoInf          1;           // Redundant for incompressible
+    liftDir         (0 0 1);
+    dragDir         (1 0 0);
+    CofR            (0 0 0);  // Axle midpoint on ground MUSTANG S197
+    pitchAxis       (0 1 0);
+    magUInf         50;
+    lRef            2.189;        // Wheelbase Araba
+    Aref            1.8;        // Frontal Area
+    porosity        no;
+}
+
+RadBody_wall
+{
+    type            forceCoeffs;
+    libs            ("libforces.so");
+    writeControl    timeStep;
+    timeInterval    1;
+    log             yes;
+    patches         (Wing_wall);
+    rho             rhoInf;      // Indicates incompressible
+    rhoInf          1;           // Redundant for incompressible
+    liftDir         (0 0 1);
+    dragDir         (1 0 0);
+    CofR            (0 0 0);  // Axle midpoint on ground MUSTANG S197
+    pitchAxis       (0 1 0);
+    magUInf         50;
+    lRef            2.189;        // Wheelbase Araba
+    Aref            1.8;        // Frontal Area
+    porosity        yes;
+}
+
+Wing_wall
+{
+    type            forceCoeffs;
+    libs            ("libforces.so");
+    writeControl    timeStep;
+    timeInterval    1;
+    log             yes;
+    patches         (Wing_wall);
+    rho             rhoInf;      // Indicates incompressible
+    rhoInf          1;           // Redundant for incompressible
+    liftDir         (0 0 1);
+    dragDir         (1 0 0);
+    CofR            (0 0 0);  // Axle midpoint on ground MUSTANG S197
+    pitchAxis       (0 1 0);
+    magUInf         50;
+    lRef            2.189;        // Wheelbase Araba
+    Aref            1.8;        // Frontal Area
+    porosity        no;
+}
+
+Splitter_wall
+{
+    type            forceCoeffs;
+    libs            ("libforces.so");
+    writeControl    timeStep;
+    timeInterval    1;
+    log             yes;
+    patches         (Splitter_wall);
+    rho             rhoInf;      // Indicates incompressible
+    rhoInf          1;           // Redundant for incompressible
+    liftDir         (0 0 1);
+    dragDir         (1 0 0);
+    CofR            (0 0 0);  // Axle midpoint on ground MUSTANG S197
+    pitchAxis       (0 1 0);
+    magUInf         50;
+    lRef            2.189;        // Wheelbase Araba
+    Aref            1.8;        // Frontal Area
+    porosity        no;
+}
+
+Upright_wall
+{
+    type            forceCoeffs;
+    libs            ("libforces.so");
+    writeControl    timeStep;
+    timeInterval    1;
+    log             yes;
+    patches         (Upright_wall);
+    rho             rhoInf;      // Indicates incompressible
+    rhoInf          1;           // Redundant for incompressible
+    liftDir         (0 0 1);
+    dragDir         (1 0 0);
+    CofR            (0 0 0);  // Axle midpoint on ground MUSTANG S197
+    pitchAxis       (0 1 0);
+    magUInf         50;
+    lRef            2.189;        // Wheelbase Araba
+    Aref            1.8;        // Frontal Area
+    porosity        no;
+}
+
+CarBody_wall
+{
+    type            forceCoeffs;
+    libs            ("libforces.so");
+    writeControl    timeStep;
+    timeInterval    1;
+    log             yes;
+    patches         (CarBody_wall);
+    rho             rhoInf;      // Indicates incompressible
+    rhoInf          1;           // Redundant for incompressible
+    liftDir         (0 0 1);
+    dragDir         (1 0 0);
+    CofR            (0 0 0);  // Axle midpoint on ground MUSTANG S197
+    pitchAxis       (0 1 0);
+    magUInf         50;
+    lRef            2.189;        // Wheelbase Araba
+    Aref            1.8;        // Frontal Area
+    porosity        no;
+}
+
+carGroup
+{
+    type            forceCoeffs;
+    libs            ("libforces.so");
+    writeControl    timeStep;
+    timeInterval    1;
+    log             yes;
+    patches         (carGroup);
+    rho             rhoInf;      // Indicates incompressible
+    rhoInf          1;           // Redundant for incompressible
+    liftDir         (0 0 1);
+    dragDir         (1 0 0);
+    CofR            (0 0 0);  // Axle midpoint on ground MUSTANG S197
+    pitchAxis       (0 1 0);
+    magUInf         50;
+    lRef            2.189;        // Wheelbase Araba
+    Aref            1.8;        // Frontal Area
+    porosity        no;
+}
+
+
+// ************************************************************************* //
