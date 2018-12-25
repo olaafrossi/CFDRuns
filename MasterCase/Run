@@ -12,9 +12,9 @@ cd ${0%/*} || exit 1    # Run from this directory
 #runParallel patchSummary
 runParallel potentialFoam
 runParallel $(getApplication)
-#runApplication reconstructParMesh -constant
+runApplication reconstructParMesh -constant
 runApplication reconstructPar -latestTime
-#runApplication postProcess -func "totalPressureIncompressible(p,U)"
+runApplication postProcess -func "totalPressureIncompressible(p,U)"
 #paraFoam --script=ParaPostPro/Macros/Xslices.py
 #foamToVTK -latestTime
 #mv VTK ParaPostPro

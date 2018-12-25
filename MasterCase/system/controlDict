@@ -16,13 +16,13 @@ FoamFile
 
 application     simpleFoam;
 
-startFrom       latestTime;
+startFrom       startTime; //startTime if re-running on the same mesh
 
 startTime       0;
 
 stopAt          endTime;
 
-endTime         2000;
+endTime         5000;
 
 deltaT          1;
 
@@ -47,6 +47,7 @@ runTimeModifiable true;
 functions
 {
     #include "forceCoeffs"
+    #include "forces"
     #includeFunc "residuals"
     #includeFunc "wallShearStress"
     #includeFunc "yPlus"
