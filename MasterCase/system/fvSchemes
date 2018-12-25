@@ -22,27 +22,34 @@ ddtSchemes
 
 gradSchemes
 {
-    default         Gauss linear;
-    grad(U)         cellLimited Gauss linear 1; //linear upwind //look at TVD and NVD schemes //try default
+    default cellLimited Gauss linear 1.0;
+    grad(U) Gauss linear;
+    grad(p) cellLimited Gauss linear 1.0;
 }
 
 divSchemes //foamSearch -c $FOAM_TUTORIALS "divScemes.div(phi,k)" fvScheme
 {
-    default         none; //try Gauss linear corrected
-    div(phi,U)      bounded Gauss upwind; //wolf uses bounded Gauss linearUpwind Grad(U)); //try Gauss linear corrected
-    div(phi,k)      bounded Gauss upwind; //try Gauss linear corrected
-    div(phi,omega)  bounded Gauss upwind; //try Gauss linear corrected
-    div((nuEff*dev2(T(grad(U))))) Gauss linear; //same as wolf
+    default Gauss linear;
+    div(phi,U) bounded Gauss upwind;
+    div(phi,omega) bounded Gauss upwind;
+    div((nuEff*dev(T(grad(U))))) Gauss linear;
+    div(phi,k) bounded Gauss upwind;
 }
 
 laplacianSchemes
 {
-    default         Gauss linear limited corrected 1;
+    default Gauss linear limited corrected 1.0;
+    laplacian(nuEff,U) Gauss linear limited corrected 1.0;
+    laplacian((1|A(U)),p) Gauss linear limited corrected 1.0;
+    laplacian(nu,U) Gauss linear limited corrected 1.0;
+    laplacian(1,p) Gauss linear corrected;
 }
 
 interpolationSchemes
 {
-    default         linear;
+    default linear;
+    interpolate(HbyA) linear;
+    interpolate(U) linear;
 }
 
 snGradSchemes
@@ -55,3 +62,8 @@ wallDist
     method meshWave;
 }
 
+fluxRequired 
+{
+    default no;
+    p ;
+}
