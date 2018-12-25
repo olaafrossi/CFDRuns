@@ -32,11 +32,11 @@ writeInterval   100;
 
 purgeWrite      1;
 
-writeFormat     binary;
+writeFormat     ascii; //try from binary
 
-writePrecision  6;
+writePrecision  12;
 
-writeCompression off;
+writeCompression on;
 
 timeFormat      general;
 

@@ -17,18 +17,7 @@ FoamFile
 surfaces 
 
 (
-"CarBody.stl"
-"Splitter.stl" 
-"Wing.stl" 
-"Upright.stl" 
-"RadBody.stl"
-"RadSurface.stl"  
-"FRTire.stl" 
-"FRPlinth.stl" 
-"FrontPlug.stl" 
-"RRTire.stl" 
-"RRPlinth.stl" 
-"RearPlug.stl" 
+"Ahmed.stl"
 );
 
 // Identify a feature when angle between faces < includedAngle

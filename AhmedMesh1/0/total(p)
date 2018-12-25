@@ -55,46 +55,6 @@ boundaryField
         type            calculated;
         value           uniform 0;
     }
-    Splitter_wall
-    {
-        type            calculated;
-        value           uniform 0;
-    }
-    Wing_wall
-    {
-        type            calculated;
-        value           uniform 0;
-    }
-    Upright_wall
-    {
-        type            calculated;
-        value           uniform 0;
-    }
-    RadBody_wall
-    {
-        type            calculated;
-        value           uniform 0;
-    }
-    FRTire_wall
-    {
-        type            calculated;
-        value           uniform 0;
-    }
-    FRPlinth_wall
-    {
-        type            calculated;
-        value           uniform 0;
-    }
-    RRTire_wall
-    {
-        type            calculated;
-        value           uniform 0;
-    }
-    RRPlinth_wall
-    {
-        type            calculated;
-        value           uniform 0;
-    }
 }
 
 

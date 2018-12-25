@@ -50,12 +50,6 @@ boundaryField
         type            omegaWallFunction;
         value           $internalField;
     }
-    
-    tireGroup
-    {
-        type            omegaWallFunction;
-        value           $internalField;
-    }
 
     symWall
     {

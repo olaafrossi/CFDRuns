@@ -52,12 +52,6 @@ boundaryField
         value           $internalField;
     }
     
-    tireGroup
-    {
-        type            kqRWallFunction;
-        value           $internalField;
-    }
-
     left
     {
         type        zeroGradient;
