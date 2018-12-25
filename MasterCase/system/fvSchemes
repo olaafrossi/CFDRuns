@@ -25,6 +25,11 @@ gradSchemes
     default cellLimited Gauss linear 1.0;
     grad(U) Gauss linear;
     grad(p) cellLimited Gauss linear 1.0;
+
+    //from simscale Ahmed case
+    //default Gauss linear;
+    //grad(p) Gauss linear;
+    //grad(U) Gauss linear;
 }
 
 divSchemes //foamSearch -c $FOAM_TUTORIALS "divScemes.div(phi,k)" fvScheme
@@ -34,6 +39,20 @@ divSchemes //foamSearch -c $FOAM_TUTORIALS "divScemes.div(phi,k)" fvScheme
     div(phi,omega) bounded Gauss upwind;
     div((nuEff*dev(T(grad(U))))) Gauss linear;
     div(phi,k) bounded Gauss upwind;
+
+    //from simscale Ahmed case
+    //default Gauss linear;
+    //div(phi,U) Gauss linearUpwindV grad(U);
+    //div(phi,k) Gauss linear;
+    //div((nuEff*dev(T(grad(U))))) Gauss linear;
+    //div(phi,omega) Gauss linear;
+
+    //From early experiments
+    //default         none;
+    //div(phi,U)      bounded Gauss upwind; //wolf uses bounded Gauss linearUpwind Grad(U));
+    //div(phi,k)      bounded Gauss upwind;
+    //div(phi,omega)  bounded Gauss upwind;
+    //div((nuEff*dev2(T(grad(U))))) Gauss linear; //same as wolf
 }
 
 laplacianSchemes
@@ -43,6 +62,13 @@ laplacianSchemes
     laplacian((1|A(U)),p) Gauss linear limited corrected 1.0;
     laplacian(nu,U) Gauss linear limited corrected 1.0;
     laplacian(1,p) Gauss linear corrected;
+
+    //from Simscale Ahmed Case
+    //default Gauss linear corrected;
+    //laplacian(nuEff,U) Gauss linear corrected;
+    //laplacian((1|A(U)),p) Gauss linear corrected;
+    //laplacian(nu,U) Gauss linear corrected;
+
 }
 
 interpolationSchemes

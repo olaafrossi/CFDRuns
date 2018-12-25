@@ -18,16 +18,27 @@ solvers
 {
     p
     {
+        solver GAMG;
+        smoother GaussSeidel;
+        nPreSweeps 1; //try 2 sometimes
+        nPostSweeps 1;
         relTol 0.01;
         cacheAgglomeration on;
-        nPreSweeps 1;
         agglomerator faceAreaPair;
         nCellsInCoarsestLevel 10;
-        solver GAMG;
-        nPostSweeps 1;
         mergeLevels 1;
-        smoother GaussSeidel;
         tolerance 1e-08;
+        //postSweepsLevelMultiplier: multiplier for the the number of sweeps between each refinement level (default 1).
+        //maxPostSweeps: maximum number of sweeps as the algorithm is refining (default 4).
+        //nFinestSweeps: number of sweeps at finest level (default 2).
+        //preSweepsLevelMultiplier: multiplier for the the number of sweeps between each coarsening level (default 1).
+        //maxPreSweeps: maximum number of sweeps as the algorithm is coarsening (default 4).
+        //cacheAgglomeration: switch specifying caching of the agglomeration strategy (default true).
+        //nCellsInCoarsestLevel: approximate mesh size at the most coarse level in terms of the number of cells (default 10).
+        //directSolveCoarset: use a direct solver at the coarsest level (default false).
+        //mergeLevels: keyword controls the speed at which coarsening or refinement is performed; 
+        //the default is 1, which is safest, but for simple meshes, the solution speed can be increased by 
+        //coarsening/refining 2 levels at a time, i.e. setting mergeLevels 2.
     }
 
     Phi
@@ -37,18 +48,21 @@ solvers
 
     U
     {
-        relTol 0.01;
-        smoother symGaussSeidel;
-        tolerance 1e-07;
         solver smoothSolver;
+        smoother symGaussSeidel;
+        //smoother GaussSeidel;
+        relTol 0.01;
+        tolerance 1e-07;
     }
 
     k
     {
-        relTol 0.01;
-        smoother symGaussSeidel;
-        tolerance 1e-07;
         solver smoothSolver;
+        smoother symGaussSeidel;
+        //smoother GaussSeidel;
+        relTol 0.01;
+        tolerance 1e-07;
+        
     }
 
     omega
