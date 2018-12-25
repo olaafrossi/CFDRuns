@@ -1,0 +1,118 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  6
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      fvSolution;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+solvers
+{
+    p
+    {
+        solver GAMG;
+        smoother GaussSeidel;
+        nPreSweeps 1; //try 2 sometimes
+        nPostSweeps 1;
+        relTol 0.01;
+        cacheAgglomeration on;
+        agglomerator faceAreaPair;
+        nCellsInCoarsestLevel 10;
+        mergeLevels 1;
+        tolerance 1e-08;
+        //postSweepsLevelMultiplier: multiplier for the the number of sweeps between each refinement level (default 1).
+        //maxPostSweeps: maximum number of sweeps as the algorithm is refining (default 4).
+        //nFinestSweeps: number of sweeps at finest level (default 2).
+        //preSweepsLevelMultiplier: multiplier for the the number of sweeps between each coarsening level (default 1).
+        //maxPreSweeps: maximum number of sweeps as the algorithm is coarsening (default 4).
+        //cacheAgglomeration: switch specifying caching of the agglomeration strategy (default true).
+        //nCellsInCoarsestLevel: approximate mesh size at the most coarse level in terms of the number of cells (default 10).
+        //directSolveCoarset: use a direct solver at the coarsest level (default false).
+        //mergeLevels: keyword controls the speed at which coarsening or refinement is performed; 
+        //the default is 1, which is safest, but for simple meshes, the solution speed can be increased by 
+        //coarsening/refining 2 levels at a time, i.e. setting mergeLevels 2.
+    }
+
+    Phi
+    {
+        $p;
+    }
+
+    U
+    {
+        solver smoothSolver;
+        smoother symGaussSeidel;
+        //smoother GaussSeidel;
+        relTol 0.01;
+        tolerance 1e-07;
+    }
+
+    k
+    {
+        solver smoothSolver;
+        smoother symGaussSeidel;
+        //smoother GaussSeidel;
+        relTol 0.01;
+        tolerance 1e-07;
+        
+    }
+
+    omega
+    {
+        relTol 0.01;
+        smoother symGaussSeidel;
+        tolerance 1e-07;
+        solver smoothSolver;
+    }
+}
+
+SIMPLE 
+{
+    pRefValue 0.0;
+    residualControl 
+    {
+        k 1e-05;
+        U 1e-05;
+        "p.*" 1e-05;
+        omega 1e-05;
+    }
+    nNonOrthogonalCorrectors 0;
+    pRefCell 0;
+    //consistent yes;
+}
+
+potentialFlow
+{
+    pRefValue 0.0;
+    nNonOrthogonalCorrectors 10;
+    pRefCell 0;
+}
+
+relaxationFactors 
+{
+    fields 
+    {
+        p 0.2;
+    }
+    equations 
+    {
+        omega 0.5;
+        k 0.5;
+        U 0.5;
+    }
+/*
+cache
+{
+    grad(U);
+}
+*/
+// ************************************************************************* //
+
