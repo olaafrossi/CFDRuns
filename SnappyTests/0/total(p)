@@ -50,7 +50,12 @@ boundaryField
         type            calculated;
         value           uniform 1500;
     }
-    CarBody_wall
+    Brick_wall
+    {
+        type            calculated;
+        value           uniform 0;
+    }
+    Splitter_wall
     {
         type            calculated;
         value           uniform 0;

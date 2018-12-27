@@ -10,28 +10,33 @@ FoamFile
     version     2.0;
     format      ascii;
     class       dictionary;
-    object      surfaceFeaturesDict;
+    object      decomposeParDict;
 }
+
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-surfaces 
+numberOfSubdomains 20;
 
-(
-"Ahmed.stl"
-);
+//method          hierarchical;
+method            scotch;
 
-// Identify a feature when angle between faces < includedAngle
-includedAngle       165;
-
-subsetFeatures
+simpleCoeffs
 {
-    // Keep nonManifold edges (edges with >2 connected faces)
-    nonManifoldEdges       no;
-
-    // Keep open edges (edges with 1 connected face)
-    openEdges       yes;
+    n               (4 1 1);
+    delta           0.001;
 }
 
-writeOBJ yes;
+hierarchicalCoeffs
+{
+    n               (5 2 2);
+    delta           0.001;
+    order           xyz;
+}
+
+manualCoeffs
+{
+    dataFile        "cellDecomposition";
+}
+
 
 // ************************************************************************* //

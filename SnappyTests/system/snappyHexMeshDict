@@ -15,47 +15,23 @@ FoamFile
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 // Which of the steps to run
-castellatedMesh true;
-snap            true;
+castellatedMesh false;
+snap            false;
 addLayers       true;
 
 geometry
 {
-    Ahmed.stl
+    Brick.stl
     {
         type triSurfaceMesh;
-        name CarBody_wall;
+        name Brick_wall;
     }
 
-    FinerefinementBox
+    Splitter.stl
     {
-        type searchableBox;
-        min (-1.5 0.0 0.0);
-        max (4.0 1.0 1.0);
+        type triSurfaceMesh;
+        name Splitter_wall;
     }
-
-    FloorBox
-    {
-        type searchableBox;
-        min (-10.0 0.0 0.0); //for mini tunnel
-        max ( 20.0 8.0 1.0);
-    } 
-
-    FineFloorBox
-    {
-        type searchableBox;
-        min (-1.5 0.0 0.0);
-        max (4.0 2.0 0.0625);
-    }    
-       
-/*
-    heatExchangerBox
-    {
-        type searchableBox;
-        min (-1.22 0.00 1.02);
-        max (-0.98 0.48 1.08);
-    }
-*/
 }
 // Settings for the castellatedMesh generation.
 castellatedMeshControls
@@ -64,16 +40,21 @@ castellatedMeshControls
     // ~~~~~~~~~~~~~~~~~~~~~
     maxLocalCells  1500000;
     maxGlobalCells 30000000;
-    minRefinementCells 10; //stock is 10
-    maxLoadUnbalance 0.10; //stock is .10
-    nCellsBetweenLevels 3; //stock is 3
+    minRefinementCells 5; //stock is 10
+    maxLoadUnbalance 0.05; //stock is .10
+    nCellsBetweenLevels 1; //stock is 3
     // Explicit feature edge refinement
     // Specifies a level for any cell intersected by its edges.
     features
     (
         {
-            file "Ahmed.eMesh";
-            level 8;
+            file "Brick.eMesh";
+            level 9;
+        }
+
+        {
+            file "Splitter.eMesh";
+            level 9;
         }
     );
      refinementSurfaces
@@ -95,49 +76,38 @@ refine level 10= .0009765625m
 */
 
     {
-        CarBody_wall
+        Brick_wall
         {
-            level (8 8); //this is the global refinement of the STL geo
+            level (9 9); //this is the global refinement of the STL geo
+            patchInfo
+            {
+                type wall;
+                inGroups (carGroup);
+            }                                 
+        }
+
+        Splitter_wall
+        {
+            level (9 9); //this is the global refinement of the STL geo
             patchInfo
             {
                 type wall;
                 inGroups (carGroup);
             }                                 
         } 
+  
     }                            
     // Resolve sharp angles
     resolveFeatureAngle 1; //30 is stock, lets try 1
     // Region-wise refinement
 refinementRegions
     {
-        FloorBox
-        {
-            mode inside;
-            levels ((1E15 1));
-        }
-
-        FineFloorBox
-        {
-            mode inside;
-            levels ((1E15 5));
-        }
-                
-        FinerefinementBox
-        {
-            mode inside;
-            levels ((1E15 5));
-        }
-
-        CarBody_wall
-        {
-            mode distance;
-            levels ((.05 8)); // levels must be ordered nearest first
-        }            
+          
     }
 /////////////////////////////////////////////////////////////////////////////////////////////////////
     // Mesh selection
     // ~~~~~~~~~~~~~~
-    locationInMesh (3.9001 3.9001 0.43);
+    locationInMesh (1.9001 1.9001 0.43);
     allowFreeStandingZoneFaces true;
 }
 
@@ -146,18 +116,18 @@ snapControls
 {
     nSmoothPatch 5; //3 is stock, 5 reccomended from Simscale
     tolerance 5.0; //2.0 is stock, 5 reccomended from Simscale
-    nSolveIter 50; // 30 is stock 300 from wolf dynamics
+    nSolveIter 300; // 30 is stock 300 from wolf dynamics
     nRelaxIter 12; //simscale says 5-8
     nFeatureSnapIter 20; //10 is stock 20 from wolf
     implicitFeatureSnap false;
-    explicitFeatureSnap true; //this will snap to the surface feature extract
-    multiRegionFeatureSnap true; //stock is flase
+    explicitFeatureSnap true; //this will snap to the surface feature extract- 20% faster and give much better meshcheck results
+    multiRegionFeatureSnap false; //stock is false/ adds 10% time creates a shit mess when connecting STLs
 }
 
 addLayersControls
 {
     relativeSizes true;
-    nSurfaceLayers 3;
+    nSurfaceLayers 1;
     expansionRatio 1.2;
     finalLayerThickness 0.3;
     //firstLayerThickness 0.001;
@@ -168,19 +138,12 @@ addLayersControls
     //https://en.wikipedia.org/wiki/Law_of_the_wall
     layers
     {
-        CarBody_wall
+        "(carGroup).*"
         {
-            nSurfaceLayers 4;
+            nSurfaceLayers 1;
             //expansionRatio 1.3;
             //finalLayerThickness 0.3;
             //minThickness 0.001;
-        }
-        lowerWall
-        {
-            nSurfaceLayers 3;
-            //expansionRatio 1.3;
-            //finalLayerThickness 0.3;
-            //minThickness 0.002;
         }
     }
     nGrow 0;
@@ -195,7 +158,7 @@ addLayersControls
     minMedianAxisAngle 90; //90 is stock
     minMedialAxisAngle 90; //90 is stock
     nBufferCellsNoExtrude 0;
-    nLayerIter 90; //50 is stock //90 wolf
+    nLayerIter 50; //50 is stock //90 wolf
 }
 
 meshQualityControls

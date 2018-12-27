@@ -5,11 +5,11 @@ cd ${0%/*} || exit 1    # Run from this directory
 . $WM_PROJECT_DIR/bin/tools/RunFunctions
 
 #mkdir ParaPostPro/Images
-runApplication surfaceFeatures
-runApplication blockMesh
-runApplication decomposePar -copyZero
+#runApplication surfaceFeatures
+#runApplication blockMesh
+#runApplication decomposePar -copyZero
 runParallel snappyHexMesh -overwrite
-runParallel patchSummary
+#runParallel patchSummary
 #runParallel potentialFoam
 #runParallel $(getApplication)
 runApplication reconstructParMesh -constant
@@ -21,6 +21,6 @@ runApplication reconstructParMesh -constant
 #cp -r postProcessing ParaPostPro
 #cp log.simpleFoam ParaPostPro
 #cp -r ParaPostPro/ ~/Dropbox/CFD/foamCASES/Current
-#checkMesh -allTopology -allGeometry
+checkMesh -allTopology -allGeometry
 
 #------------------------------------------------------------------------------

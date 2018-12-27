@@ -10,13 +10,48 @@ FoamFile
     version     2.0;
     format      ascii;
     class       dictionary;
-    object      transportProperties;
+    object      controlDict;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-transportModel  Newtonian;
+application     simpleFoam;
 
-nu              [0 2 -1 0 0 0 0] 1.5e-05;
-rhoRef 			1.1965;
+startFrom       startTime; //startTime if re-running on the same mesh
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         5000;
+
+deltaT          1;
+
+writeControl    timeStep;
+
+writeInterval   100;
+
+purgeWrite      1;
+
+writeFormat     binary;
+
+writePrecision  6;
+
+writeCompression off;
+
+timeFormat      general;
+
+timePrecision   6;
+
+runTimeModifiable true;
+
+functions
+{
+    #include "forceCoeffs"
+    #include "forces"
+    #includeFunc "residuals"
+    #includeFunc "wallShearStress"
+    #includeFunc "yPlus"
+}
+
 
 // ************************************************************************* //
