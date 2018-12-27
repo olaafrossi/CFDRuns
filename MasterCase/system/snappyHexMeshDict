@@ -48,8 +48,14 @@ geometry
     RadBody.stl
     {
         type triSurfaceMesh;
-        name RadBody_wall;
-    }    
+        name RadBody_zone;
+    }
+
+    RadFrame.stl
+    {
+        type triSurfaceMesh;
+        name RadFrame_wall;
+    }      
 
     FRTire.stl
     {
@@ -87,12 +93,6 @@ geometry
         name rotatingZoneRear;
     }
 
-    RadSurface.stl
-    {
-        type triSurfaceMesh;
-        name RadSurface_wall;
-    }  
-
     FinerefinementBox
     {
         type searchableBox;
@@ -114,14 +114,6 @@ geometry
         max (7.0 2.0 0.0625);
     }    
        
-/*
-    heatExchangerBox
-    {
-        type searchableBox;
-        min (-1.22 0.00 1.02);
-        max (-0.98 0.48 1.08);
-    }
-*/
 }
 // Settings for the castellatedMesh generation.
 castellatedMeshControls
@@ -163,7 +155,7 @@ castellatedMeshControls
         }
 
         {
-            file "RadSurface.eMesh";
+            file "RadFrame.eMesh";
             level 9;
         }
 
@@ -256,7 +248,7 @@ refine level 10= .0009765625m
             }                                 
         } 
 
-        RadBody_wall
+        RadFrame_wall
         {
             level (6 7); //this is the global refinement of the STL geo
             patchInfo
@@ -306,7 +298,7 @@ refine level 10= .0009765625m
             }                                 
         } 
 
-        RadSurface_wall
+        RadBody_zone
         {
             level (7 7);
             cellZone heatExchanger;
@@ -383,7 +375,7 @@ snapControls
 {
     nSmoothPatch 5; //3 is stock, 5 reccomended from Simscale
     tolerance 5.0; //2.0 is stock, 5 reccomended from Simscale
-    nSolveIter 400; // 30 is stock 300 from wolf dynamics
+    nSolveIter 200; // 30 is stock 300 from wolf dynamics
     nRelaxIter 12; //simscale says 5-8
     nFeatureSnapIter 20; //10 is stock 20 from wolf
     implicitFeatureSnap false;
@@ -439,7 +431,7 @@ addLayersControls
     minMedianAxisAngle 90; //90 is stock
     minMedialAxisAngle 90; //90 is stock
     nBufferCellsNoExtrude 0;
-    nLayerIter 90; //50 is stock //90 wolf
+    nLayerIter 50; //50 is stock //90 wolf
 }
 
 meshQualityControls

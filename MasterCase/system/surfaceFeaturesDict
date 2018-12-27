@@ -22,13 +22,13 @@ surfaces
 "Wing.stl" 
 "Upright.stl" 
 "RadBody.stl"
-"RadSurface.stl"  
 "FRTire.stl" 
 "FRPlinth.stl" 
-"FrontPlug.stl" 
+"RadFrame.stl" 
 "RRTire.stl" 
 "RRPlinth.stl" 
-"RearPlug.stl" 
+"RearPlug.stl"
+"FrontPlug.stl"  
 );
 
 // Identify a feature when angle between faces < includedAngle

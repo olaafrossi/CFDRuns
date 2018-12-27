@@ -15,7 +15,7 @@ FoamFile
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 //- Maximum non-orthogonality allowed. Set to 180 to disable.
-maxNonOrtho 55;
+maxNonOrtho 75;
 
 //- Max skewness allowed. Set to <0 to disable.
 maxBoundarySkewness 4;

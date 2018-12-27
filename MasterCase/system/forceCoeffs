@@ -86,14 +86,14 @@ RRTire_wall
     porosity        no;
 }
 
-RadBody_wall
+RadFrame_wall
 {
     type            forceCoeffs;
     libs            ("libforces.so");
     writeControl    timeStep;
     timeInterval    1;
     log             yes;
-    patches         (Wing_wall);
+    patches         (RadFrame_wall);
     rho             rhoInf;      // Indicates incompressible
     rhoInf          1;           // Redundant for incompressible
     liftDir         (0 0 1);

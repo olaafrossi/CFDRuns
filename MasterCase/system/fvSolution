@@ -20,9 +20,9 @@ solvers
     {
         solver GAMG;
         smoother GaussSeidel;
-        nPreSweeps 1; //try 2 sometimes
-        nPostSweeps 1;
-        relTol 0.01;
+        nPreSweeps 2; //try 2 sometimes
+        nPostSweeps 2;
+        relTol 0.001;
         cacheAgglomeration on;
         agglomerator faceAreaPair;
         nCellsInCoarsestLevel 10;
@@ -51,8 +51,8 @@ solvers
         solver smoothSolver;
         smoother symGaussSeidel;
         //smoother GaussSeidel;
-        relTol 0.01;
-        tolerance 1e-07;
+        relTol 0.001;
+        tolerance 1e-08;
     }
 
     k
@@ -61,7 +61,7 @@ solvers
         smoother symGaussSeidel;
         //smoother GaussSeidel;
         relTol 0.01;
-        tolerance 1e-07;
+        tolerance 1e-08;
         
     }
 
@@ -69,7 +69,7 @@ solvers
     {
         relTol 0.01;
         smoother symGaussSeidel;
-        tolerance 1e-07;
+        tolerance 1e-08;
         solver smoothSolver;
     }
 }
@@ -77,13 +77,13 @@ solvers
 SIMPLE 
 {
     pRefValue 0.0;
-    residualControl 
-    {
-        k 1e-05;
-        U 1e-05;
-        "p.*" 1e-05;
-        omega 1e-05;
-    }
+    //residualControl 
+    //{
+     //   k 1e-05;
+     //   U 1e-05;
+     //   "p.*" 1e-05;
+     //   omega 1e-05;
+   // }
     nNonOrthogonalCorrectors 0;
     pRefCell 0;
     //consistent yes;
