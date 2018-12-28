@@ -15,9 +15,10 @@ FoamFile
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 // Which of the steps to run
-castellatedMesh false;
-snap            false;
-addLayers       true;
+
+castellatedMesh true;
+snap true;
+addLayers false;
 
 geometry
 {
@@ -32,29 +33,36 @@ geometry
         type triSurfaceMesh;
         name Splitter_wall;
     }
+
+    FloorBox
+    {
+        type searchableBox;
+        min (-4.0 0.0 0.0);
+        max (4.0 2.0 0.125);
+    }
 }
 // Settings for the castellatedMesh generation.
 castellatedMeshControls
 {
     // Refinement parameters
     // ~~~~~~~~~~~~~~~~~~~~~
-    maxLocalCells  1500000;
-    maxGlobalCells 30000000;
-    minRefinementCells 5; //stock is 10
+    maxLocalCells  10000000;
+    maxGlobalCells 100000000;
+    minRefinementCells 10; //stock is 10
     maxLoadUnbalance 0.05; //stock is .10
-    nCellsBetweenLevels 1; //stock is 3
+    nCellsBetweenLevels 3; //stock is 3
     // Explicit feature edge refinement
     // Specifies a level for any cell intersected by its edges.
     features
     (
         {
             file "Brick.eMesh";
-            level 9;
+            level 7;
         }
 
         {
             file "Splitter.eMesh";
-            level 9;
+            level 7;
         }
     );
      refinementSurfaces
@@ -78,7 +86,7 @@ refine level 10= .0009765625m
     {
         Brick_wall
         {
-            level (9 9); //this is the global refinement of the STL geo
+            level (7 7); //this is the global refinement of the STL geo
             patchInfo
             {
                 type wall;
@@ -88,7 +96,7 @@ refine level 10= .0009765625m
 
         Splitter_wall
         {
-            level (9 9); //this is the global refinement of the STL geo
+            level (7 7); //this is the global refinement of the STL geo
             patchInfo
             {
                 type wall;
@@ -98,17 +106,22 @@ refine level 10= .0009765625m
   
     }                            
     // Resolve sharp angles
-    resolveFeatureAngle 1; //30 is stock, lets try 1
+    resolveFeatureAngle 2; //30 is stock, lets try 1
     // Region-wise refinement
 refinementRegions
     {
-          
+
+        FloorBox
+        {
+            mode inside;
+            levels ((1E15 3));
+        }      
     }
 /////////////////////////////////////////////////////////////////////////////////////////////////////
     // Mesh selection
     // ~~~~~~~~~~~~~~
-    locationInMesh (1.9001 1.9001 0.43);
-    allowFreeStandingZoneFaces true;
+    locationInMesh (2.9001 0.9001 0.43);
+    allowFreeStandingZoneFaces false;
 }
 
 // Settings for the snapping.
@@ -126,33 +139,42 @@ snapControls
 
 addLayersControls
 {
-    relativeSizes true;
+    relativeSizes false;
     nSurfaceLayers 1;
-    expansionRatio 1.2;
-    finalLayerThickness 0.3;
-    //firstLayerThickness 0.001;
-    //thickness 0.6;
-    minThickness 0.001;
-    
+    expansionRatio 1.0;
+    //finalLayerThickness 0.1;
+    firstLayerThickness 0.1;
+    minThickness 0.01;
+
     // Per final patch (so not geometry!) the layer information
     //https://en.wikipedia.org/wiki/Law_of_the_wall
     layers
     {
         "(carGroup).*"
         {
-            nSurfaceLayers 1;
-            //expansionRatio 1.3;
+            nSurfaceLayers 3;
+            expansionRatio 1.1;
+            firstLayerThickness 0.001;
+            //finalLayerThickness 0.4;
+            minThickness 0.0001;
+        }
+
+        lowerWall
+        {
+            nSurfaceLayers 3;
+            expansionRatio 1.25;
+            firstLayerThickness 0.0060;
             //finalLayerThickness 0.3;
-            //minThickness 0.001;
+            minThickness 0.001;
         }
     }
     nGrow 0;
     featureAngle 180; //180 is stock 130 from wolf try 1 from intel
-    slipFeatureAngle 75; //75 stock 30 from wolf
-    nRelaxIter 10; //8 is stock 10 from wolf
-    nSmoothSurfaceNormals 5; //1 is stock
-    nSmoothNormals 10; //5 is stock, 10 from wolf
-    nSmoothThickness 10;
+    //slipFeatureAngle 75; //75 stock 30 from wolf
+    nRelaxIter 4; //8 is stock 10 from wolf
+    nSmoothSurfaceNormals 1; //1 is stock
+    nSmoothNormals 1; //5 is stock, 10 from wolf
+    nSmoothThickness 1;
     maxFaceThicknessRatio 0.5;
     maxThicknessToMedialRatio 1.0; //.35 stock .3 from wolf //1 from intel
     minMedianAxisAngle 90; //90 is stock
@@ -164,6 +186,9 @@ addLayersControls
 meshQualityControls
 {
     #include "meshQualityDict"
+
+        // Advanced
+
 }
 
 // Advanced

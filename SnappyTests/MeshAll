@@ -1,0 +1,57 @@
+#!/bin/bash
+cd ${0%/*} || exit 1    # Run from this directory
+
+# Source run functions
+. Util/RunFunctions
+source Util/color
+#mkdir ParaPostPro/Images
+echo -e "${GREEN}   - surface Features Extract"
+runApplication surfaceFeatures
+
+echo -e "${ORANGE}   - Create Background Mesh"
+runApplication blockMesh
+
+echo -e "${GREY}   - Breaking Domain into Procs"
+runApplication decomposePar -copyZero
+
+echo -e "${ORANGE}   - Snappy- castellatedMesh & Snap"
+runParallel snappyHexMesh -overwrite
+
+echo -e "${GREY}   - re-naming snappy logfile"
+cp log.snappyHexMesh log.snappyHexMeshCastSnap
+rm log.snappyHexMesh
+
+echo -e "${RED}   - switching  meshQualityDict for layers"
+cp system/mesh*.layer system/meshQualityDict
+sed '19s/.*/castellatedMesh false;/' sys*/snappyHexMeshDict -i
+sed '20s/.*/snap false;/' sys*/snappyHexMeshDict -i
+sed '21s/.*/addLayers true;/' sys*/snappyHexMeshDict -i
+
+echo -e "${ORANGE}   - Snappy- layers"
+runParallel snappyHexMesh -overwrite
+
+echo -e "${RED}   - switching meshQualityDict back to normal"
+cp system/mesh*.normal system/meshQualityDict
+sed -e '19s/.*/castellatedMesh true;/' sys*/snappyHexMeshDict -i
+sed -e '20s/.*/snap true;/' sys*/snappyHexMeshDict -i
+sed -e '21s/.*/addLayers false;/' sys*/snappyHexMeshDict -i
+
+echo -e "${GREY}   - patch check"
+runParallel patchSummary
+runParallel potentialFoam
+runParallel $(getApplication)
+
+echo -e "${GREY}   - mesh merge"
+runApplication reconstructParMesh -constant
+runApplication reconstructPar -latestTime
+runApplication postProcess -func "totalPressureIncompressible(p,U)"
+#paraFoam --script=ParaPostPro/Macros/Xslices.py
+#foamToVTK -latestTime
+#mv VTK ParaPostPro
+#cp -r postProcessing ParaPostPro
+#cp log.simpleFoam ParaPostPro
+#cp -r ParaPostPro/ ~/Dropbox/CFD/foamCASES/Current
+echo -e "${NC}   - checkmesh"
+checkMesh -allTopology -allGeometry
+
+#------------------------------------------------------------------------------

@@ -1,9 +1,9 @@
 /*--------------------------------*- C++ -*----------------------------------*\
-  =========                 |
-  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
-   \\    /   O peration     | Website:  https://openfoam.org
-    \\  /    A nd           | Version:  6
-     \\/     M anipulation  |
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  6.x                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
 \*---------------------------------------------------------------------------*/
 FoamFile
 {
@@ -15,30 +15,31 @@ FoamFile
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 //- Maximum non-orthogonality allowed. Set to 180 to disable.
-maxNonOrtho 65;
+maxNonOrtho 180;//65;
 
 //- Max skewness allowed. Set to <0 to disable.
-maxBoundarySkewness 4;
-maxInternalSkewness 4;
+maxBoundarySkewness -1;// 20;
+maxInternalSkewness -1; //4;
 
 //- Max concaveness allowed. Is angle (in degrees) below which concavity
 //  is allowed. 0 is straight face, <0 would be convex face.
 //  Set to 180 to disable.
-maxConcave 80;
+maxConcave 180;//80;
 
 //- Minimum pyramid volume. Is absolute volume of cell pyramid.
 //  Set to a sensible fraction of the smallest cell volume expected.
 //  Set to very negative number (e.g. -1E30) to disable.
-minVol 1e-13;
+minVol -1e30; //1e-13;
 
 //- Minimum quality of the tet formed by the face-centre
 //  and variable base point minimum decomposition triangles and
-//  the cell centre. Set to very negative number (e.g. -1E30) to
+//  the cell centre. This has to be a positive number for tracking
+//  to work. Set to very negative number (e.g. -1E30) to
 //  disable.
 //     <0 = inside out tet,
 //      0 = flat tet
 //      1 = regular tet
-minTetQuality 1e-15;
+minTetQuality -1e30; //1e-15;
 
 //- Minimum face area. Set to <0 to disable.
 minArea -1;
@@ -67,15 +68,20 @@ minVolRatio 0.01;
 //  compatibility
 minTriangleTwist -1;
 
+
+//- if >0 : preserve cells with all points on the surface if the
+//  resulting volume after snapping (by approximation) is larger than
+//  minVolCollapseRatio times old volume (i.e. not collapsed to flat cell).
+//  If <0 : delete always.
+minVolCollapseRatio 0.1;
+
 nSmoothScale   4;
 
 errorReduction 0.75;
 
-//- If >0 : preserve cells with all points on the surface if the
-//  resulting volume after snapping (by approximation) is larger than
-//  minVolCollapseRatio times old volume (i.e. not collapsed to flat cell).
-//  If <0 : delete always.
-//minVolCollapseRatio 0.1;
-
+relaxed
+(
+    
+);
 
 // ************************************************************************* //
