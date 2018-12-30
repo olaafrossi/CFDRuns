@@ -65,7 +65,13 @@ boundaryField
         value           uniform 0;
     }
 
-    tireGroup
+    FRTire_wall
+    {
+        type            nutkWallFunction;
+        value           uniform 0;
+    }
+
+    RRTire_wall
     {
         type            nutkWallFunction;
         value           uniform 0;

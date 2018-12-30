@@ -51,10 +51,14 @@ boundaryField
         type            zeroGradient;
     }
 
-    tireGroup
+    FRTire_wall
     {
         type            zeroGradient;
     }
+    RRTire_wall
+    {
+        type            zeroGradient;
+    }    
 
     symWall
     {

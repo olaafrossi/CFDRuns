@@ -163,7 +163,6 @@ refine level 10= .0009765625m
             patchInfo
             {
                 type wall;
-                inGroups (tireGroup);
             }                                 
         } 
 
@@ -173,7 +172,6 @@ refine level 10= .0009765625m
             patchInfo
             {
                 type wall;
-                inGroups (tireGroup);
             }                                 
         } 
 
@@ -214,7 +212,7 @@ refinementRegions
     // Mesh selection
     // ~~~~~~~~~~~~~~
     locationInMesh (3.9001 3.9001 0.43);
-    allowFreeStandingZoneFaces false;
+    allowFreeStandingZoneFaces true;
 }
 
 // Settings for the snapping.
