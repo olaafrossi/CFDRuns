@@ -163,6 +163,7 @@ refine level 10= .0009765625m
             patchInfo
             {
                 type wall;
+                inGroups (carGroup);
             }                                 
         } 
 
@@ -172,6 +173,7 @@ refine level 10= .0009765625m
             patchInfo
             {
                 type wall;
+                inGroups (carGroup);
             }                                 
         } 
 

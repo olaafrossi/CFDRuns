@@ -18,7 +18,7 @@ runParallel potentialFoam
 runParallel $(getApplication)
 runApplication reconstructParMesh -constant
 runApplication reconstructPar -latestTime
-#runApplication postProcess -func "totalPressureIncompressible(p,U)"
+runApplication postProcess -func "totalPressureIncompressible(p,U)"
 #runApplication paraFoam --script=ParaPostPro/Macros/Iso.py
 #rm log.paraFoam
 #runApplication paraFoam --script=ParaPostPro/Macros/Mesh.py

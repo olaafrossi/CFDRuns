@@ -49,19 +49,7 @@ boundaryField
     {
         type            omegaWallFunction;
         value           $internalField;
-    }
-    
-    FRTire_wall
-    {
-        type            omegaWallFunction;
-        value           $internalField;
-    }
-
-    RRTire_wall
-    {
-        type            omegaWallFunction;
-        value           $internalField;
-    }    
+    }   
 
     symWall
     {

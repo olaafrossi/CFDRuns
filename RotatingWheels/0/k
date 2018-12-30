@@ -51,18 +51,7 @@ boundaryField
         type            kqRWallFunction;
         value           $internalField;
     }
-    
-    FRTire_wall
-    {
-        type            kqRWallFunction;
-        value           $internalField;
-    }
-    
-    RRTire_wall
-    {
-        type            kqRWallFunction;
-        value           $internalField;
-    }
+
     left
     {
         type        zeroGradient;

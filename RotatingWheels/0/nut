@@ -65,17 +65,6 @@ boundaryField
         value           uniform 0;
     }
 
-    FRTire_wall
-    {
-        type            nutkWallFunction;
-        value           uniform 0;
-    }
-
-    RRTire_wall
-    {
-        type            nutkWallFunction;
-        value           uniform 0;
-    }
 }
 
 
