@@ -47,16 +47,7 @@ boundaryField
         origin             (0.0 0.0 0.0);
         axis               (0 1 0);
         omega              constant -39.99; //-104.72;
-        //value              uniform (0 -50 0); 
-
-        /*
-                type            movingWallVelocity;
-        origin             (-0.965 0.290 1.01);
-        //axis               (0 1 0);
-        //omega              -172.413; //-104.72; //-172.413
-        value              uniform (0 50 0); 
-        */
-    }
+    }   
     #include "include/frontBackUpperPatches"
 }
 

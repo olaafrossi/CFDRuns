@@ -40,6 +40,7 @@ geometry
         name rotatingZoneFront;
     }
 
+
     refinementBox
     {
         type searchableBox;
@@ -103,7 +104,7 @@ castellatedMeshControls
         {
             file "Plug.eMesh";
             level 9;
-        }
+        }       
     );
 
 
@@ -130,7 +131,7 @@ castellatedMeshControls
             {
                 type wall;
             }
-        }
+        }       
 
         rotatingZoneFront
         {
@@ -139,7 +140,7 @@ castellatedMeshControls
             cellZone    rotatingZoneFront;
             cellZoneInside  inside;
             boundary    internal;                             
-        }  
+        }           
     }
 
     // Resolve sharp angles

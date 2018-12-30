@@ -45,7 +45,6 @@ boundaryField
     {
         type            zeroGradient;
     }
-
     #include "include/frontBackUpperPatches"
 }
 
