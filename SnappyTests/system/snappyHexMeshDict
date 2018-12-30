@@ -22,6 +22,7 @@ addLayers false;
 
 geometry
 {
+    
     Brick.stl
     {
         type triSurfaceMesh;
@@ -40,6 +41,13 @@ geometry
         min (-4.0 0.0 0.0);
         max (4.0 2.0 0.125);
     }
+
+    RefinementBox1
+    {
+        type searchableBox;
+        min (-1.0 0.0 0.0);
+        max (2.0  2.0 1.5);
+    }
 }
 // Settings for the castellatedMesh generation.
 castellatedMeshControls
@@ -55,9 +63,10 @@ castellatedMeshControls
     // Specifies a level for any cell intersected by its edges.
     features
     (
+        
         {
             file "Brick.eMesh";
-            level 8;
+            level 9;
         }
 
         {
@@ -84,9 +93,10 @@ refine level 10= .0009765625m
 */
 
     {
+
         Brick_wall
         {
-            level (8 8); //this is the global refinement of the STL geo
+            level (7 8); //this is the global refinement of the STL geo
             patchInfo
             {
                 type wall;
@@ -96,7 +106,7 @@ refine level 10= .0009765625m
 
         Splitter_wall
         {
-            level (8 8); //this is the global refinement of the STL geo
+            level (7 8); //this is the global refinement of the STL geo
             patchInfo
             {
                 type wall;
@@ -110,6 +120,12 @@ refine level 10= .0009765625m
     // Region-wise refinement
 refinementRegions
     {
+
+        RefinementBox1
+        {
+            mode inside;
+            levels ((1E15 5));
+        }  
 
         FloorBox
         {
@@ -153,18 +169,18 @@ addLayersControls
         "(carGroup).*"
         {
             nSurfaceLayers 3;
-            expansionRatio 1.35;
-            firstLayerThickness 0.0015;
-            //finalLayerThickness 0.4;
-            minThickness 0.0001;
+            expansionRatio 1.25;
+            firstLayerThickness 0.0015; //0.0015
+            //finalLayerThickness 0.5;
+            minThickness 0.001;
         }
 
         lowerWall
         {
             nSurfaceLayers 4;
-            expansionRatio 1.5;
+            expansionRatio 1.30;
             firstLayerThickness 0.0025;
-            //finalLayerThickness 0.3;
+            //finalLayerThickness 0.25;
             minThickness 0.001;
         }
     }

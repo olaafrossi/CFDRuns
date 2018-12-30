@@ -182,7 +182,8 @@ refine level 10= .0009765625m
             level       (8 8);
             faceZone    rotatingZoneFront;
             cellZone    rotatingZoneFront;
-            cellZoneInside  inside;                             
+            cellZoneInside  inside;
+            boundary    internal;                             
         }  
 
         rotatingZoneRear
@@ -190,7 +191,8 @@ refine level 10= .0009765625m
             level       (8 8);
             faceZone    rotatingZoneRear;
             cellZone    rotatingZoneRear;
-            cellZoneInside  inside;                             
+            cellZoneInside  inside;
+            boundary    internal;                             
         } 
 
          
@@ -206,25 +208,13 @@ refinementRegions
             mode inside;
             levels ((1E15 5));
         }
-        
-        rotatingZoneFront
-        {
-            mode inside;
-            levels ((1E15 4));
-        }  
-
-        rotatingZoneRear
-        {
-            mode inside;
-            levels ((1E15 4));
-        } 
                   
     }
 /////////////////////////////////////////////////////////////////////////////////////////////////////
     // Mesh selection
     // ~~~~~~~~~~~~~~
     locationInMesh (3.9001 3.9001 0.43);
-    allowFreeStandingZoneFaces true;
+    allowFreeStandingZoneFaces false;
 }
 
 // Settings for the snapping.
