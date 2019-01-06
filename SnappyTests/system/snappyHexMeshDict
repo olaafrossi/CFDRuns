@@ -23,10 +23,16 @@ addLayers false;
 geometry
 {
     
-    Brick.stl
+    Wing.stl
     {
         type triSurfaceMesh;
-        name Brick_wall;
+        name Wing_wall;
+    }
+
+    Endplate.stl
+    {
+        type triSurfaceMesh;
+        name Endplate_wall;
     }
 
     Splitter.stl
@@ -46,7 +52,7 @@ geometry
     {
         type searchableBox;
         min (-1.0 0.0 0.0);
-        max (2.0  2.0 1.5);
+        max (0.25 1.5 0.75);
     }
 }
 // Settings for the castellatedMesh generation.
@@ -65,14 +71,19 @@ castellatedMeshControls
     (
         
         {
-            file "Brick.eMesh";
-            level 9;
+            file "Wing.eMesh";
+            level 8;
+        }
+
+        {
+            file "Endplate.eMesh";
+            level 8;
         }
 
         {
             file "Splitter.eMesh";
             level 8;
-        }
+        }        
     );
      refinementSurfaces
 
@@ -94,7 +105,17 @@ refine level 10= .0009765625m
 
     {
 
-        Brick_wall
+        Wing_wall
+        {
+            level (8 8); //this is the global refinement of the STL geo
+            patchInfo
+            {
+                type wall;
+                inGroups (carGroup);
+            }                                 
+        }
+
+        Endplate_wall
         {
             level (7 8); //this is the global refinement of the STL geo
             patchInfo
@@ -116,7 +137,7 @@ refine level 10= .0009765625m
   
     }                            
     // Resolve sharp angles
-    resolveFeatureAngle 2; //30 is stock, lets try 1
+    resolveFeatureAngle 1; //30 is stock, lets try 1
     // Region-wise refinement
 refinementRegions
     {
@@ -187,12 +208,12 @@ addLayersControls
     nGrow 0;
     featureAngle 180; //180 is stock 130 from wolf try 1 from intel
     //slipFeatureAngle 75; //75 stock 30 from wolf
-    nRelaxIter 4; //8 is stock 10 from wolf
+    nRelaxIter 10; //8 is stock 10 from wolf
     nSmoothSurfaceNormals 1; //1 is stock
-    nSmoothNormals 1; //5 is stock, 10 from wolf
+    nSmoothNormals 10; //5 is stock, 10 from wolf
     nSmoothThickness 1;
     maxFaceThicknessRatio 0.5;
-    maxThicknessToMedialRatio 1.0; //.35 stock .3 from wolf //1 from intel
+    maxThicknessToMedialRatio 0.3; //.35 stock .3 from wolf //1 from intel
     minMedianAxisAngle 90; //90 is stock
     minMedialAxisAngle 90; //90 is stock
     nBufferCellsNoExtrude 0;

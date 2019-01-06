@@ -50,7 +50,12 @@ boundaryField
         type            calculated;
         value           uniform 1500;
     }
-    Brick_wall
+    Wing_wall
+    {
+        type            calculated;
+        value           uniform 0;
+    }
+    Endplate_wall
     {
         type            calculated;
         value           uniform 0;
