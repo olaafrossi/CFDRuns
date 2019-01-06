@@ -19,8 +19,8 @@ surfaces
 (
 "CarBody.stl"
 "Splitter.stl" 
-"Wing.stl" 
-"Upright.stl" 
+//"Wing.stl" 
+//"Upright.stl" 
 "RadBody.stl"
 "FRTire.stl" 
 "FRPlinth.stl" 

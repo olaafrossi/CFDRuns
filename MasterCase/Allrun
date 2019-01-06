@@ -19,6 +19,7 @@ runParallel $(getApplication)
 runApplication reconstructParMesh -constant
 runApplication reconstructPar -latestTime
 runApplication postProcess -func "totalPressureIncompressible(p,U)"
+runApplication checkMesh -allTopology -allGeometry &
 runApplication paraFoam --script=ParaPostPro/Macros/Iso.py
 rm log.paraFoam
 runApplication paraFoam --script=ParaPostPro/Macros/Mesh.py
@@ -33,6 +34,6 @@ runApplication paraFoam --script=ParaPostPro/Macros/Xslices3.py
 #cp -r postProcessing ParaPostPro
 #cp log.simpleFoam ParaPostPro
 #cp -r ParaPostPro/ ~/Dropbox/CFD/foamCASES/Current
-checkMesh -allTopology -allGeometry
+#checkMesh -allTopology -allGeometry
 
 #------------------------------------------------------------------------------

@@ -51,11 +51,6 @@ boundaryField
         type            zeroGradient;
     }
 
-    tireGroup
-    {
-        type            zeroGradient;
-    }
-
     symWall
     {
         type        symmetry;

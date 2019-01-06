@@ -32,7 +32,7 @@ cd postProcessing/carGroup/0/
 #rm forceCoeffs.dat
 #rm forceCoeffs_1.dat
 rm log.foamMonitor
-runApplication foamMonitor -y [-2.0:1.0] -t Coeffs forceCoeffs.dat
+runApplication foamMonitor -y [-1.0:1.0] -t Coeffs forceCoeffs.dat
 
 
 #Usage: ${0##*/} [OPTION] <file>

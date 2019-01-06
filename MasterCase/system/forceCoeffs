@@ -105,7 +105,7 @@ RadFrame_wall
     Aref            1.8;        // Frontal Area
     porosity        yes;
 }
-
+/*
 Wing_wall
 {
     type            forceCoeffs;
@@ -125,7 +125,7 @@ Wing_wall
     Aref            1.8;        // Frontal Area
     porosity        no;
 }
-
+*/
 Splitter_wall
 {
     type            forceCoeffs;
@@ -145,7 +145,7 @@ Splitter_wall
     Aref            1.8;        // Frontal Area
     porosity        no;
 }
-
+/*
 Upright_wall
 {
     type            forceCoeffs;
@@ -165,7 +165,7 @@ Upright_wall
     Aref            1.8;        // Frontal Area
     porosity        no;
 }
-
+*/
 CarBody_wall
 {
     type            forceCoeffs;

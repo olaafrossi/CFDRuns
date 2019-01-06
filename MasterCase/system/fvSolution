@@ -20,14 +20,14 @@ solvers
     {
         solver GAMG;
         smoother GaussSeidel;
-        nPreSweeps 2; //try 2 sometimes
-        nPostSweeps 2;
-        relTol 0.001;
+        nPreSweeps 4; //try 2 sometimes
+        nPostSweeps 4;
+        relTol 0.0001;
         cacheAgglomeration on;
         agglomerator faceAreaPair;
         nCellsInCoarsestLevel 10;
         mergeLevels 1;
-        tolerance 1e-08;
+        tolerance 1e-09;
         //postSweepsLevelMultiplier: multiplier for the the number of sweeps between each refinement level (default 1).
         //maxPostSweeps: maximum number of sweeps as the algorithm is refining (default 4).
         //nFinestSweeps: number of sweeps at finest level (default 2).
@@ -51,8 +51,8 @@ solvers
         solver smoothSolver;
         smoother symGaussSeidel;
         //smoother GaussSeidel;
-        relTol 0.001;
-        tolerance 1e-08;
+        relTol 0.0001;
+        tolerance 1e-09;
     }
 
     k
@@ -60,8 +60,8 @@ solvers
         solver smoothSolver;
         smoother symGaussSeidel;
         //smoother GaussSeidel;
-        relTol 0.01;
-        tolerance 1e-08;
+        relTol 0.0001;
+        tolerance 1e-09;
         
     }
 
@@ -84,9 +84,9 @@ SIMPLE
      //   "p.*" 1e-05;
      //   omega 1e-05;
    // }
-    nNonOrthogonalCorrectors 0;
+    nNonOrthogonalCorrectors 1;
     pRefCell 0;
-    //consistent yes;
+    consistent yes;
 }
 
 potentialFlow

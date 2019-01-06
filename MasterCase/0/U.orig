@@ -49,7 +49,7 @@ boundaryField
     FRTire_wall
     {
         type            rotatingWallVelocity;
-        origin    (-0.965 0.290 1.01); //-0.965 0.290 0.977
+        origin    (-0.965 1.01 0.290); //-0.965 0.290 0.977
         axis      (0 1 0);
         omega     -172.413; //-172.413;
         //value              uniform (0 0 0); 
@@ -58,7 +58,7 @@ boundaryField
     RRTire_wall
     {
         type            rotatingWallVelocity;
-        origin    (1.224 0.290 1.01); //1.224
+        origin    (1.224 1.01 0.290); //1.224
         axis      (0 1 0);
         omega     -172.413; //-104.72;
         //value              uniform (0 0 0); 
