@@ -28,7 +28,7 @@ geometry
         type triSurfaceMesh;
         name Wing_wall;
     }
-
+/*
     Endplate.stl
     {
         type triSurfaceMesh;
@@ -54,6 +54,7 @@ geometry
         min (-1.0 0.0 0.0);
         max (0.25 1.5 0.75);
     }
+*/    
 }
 // Settings for the castellatedMesh generation.
 castellatedMeshControls
@@ -74,7 +75,7 @@ castellatedMeshControls
             file "Wing.eMesh";
             level 8;
         }
-
+/*
         {
             file "Endplate.eMesh";
             level 8;
@@ -83,7 +84,8 @@ castellatedMeshControls
         {
             file "Splitter.eMesh";
             level 8;
-        }        
+        } 
+*/               
     );
      refinementSurfaces
 
@@ -114,7 +116,7 @@ refine level 10= .0009765625m
                 inGroups (carGroup);
             }                                 
         }
-
+/*
         Endplate_wall
         {
             level (7 8); //this is the global refinement of the STL geo
@@ -134,25 +136,14 @@ refine level 10= .0009765625m
                 inGroups (carGroup);
             }                                 
         } 
-  
+ */ 
     }                            
     // Resolve sharp angles
     resolveFeatureAngle 1; //30 is stock, lets try 1
     // Region-wise refinement
 refinementRegions
     {
-
-        RefinementBox1
-        {
-            mode inside;
-            levels ((1E15 5));
-        }  
-
-        FloorBox
-        {
-            mode inside;
-            levels ((1E15 4));
-        }      
+     
     }
 /////////////////////////////////////////////////////////////////////////////////////////////////////
     // Mesh selection
@@ -176,12 +167,12 @@ snapControls
 
 addLayersControls
 {
-    relativeSizes false;
+    relativeSizes true;
     nSurfaceLayers 1;
     expansionRatio 1.0;
-    //finalLayerThickness 0.1;
-    firstLayerThickness 0.1;
-    minThickness 0.01;
+    finalLayerThickness 0.1;
+    //firstLayerThickness 0.1;
+    minThickness 0.0001;
 
     // Per final patch (so not geometry!) the layer information
     //https://en.wikipedia.org/wiki/Law_of_the_wall
@@ -189,21 +180,13 @@ addLayersControls
     {
         "(carGroup).*"
         {
-            nSurfaceLayers 3;
-            expansionRatio 1.25;
-            firstLayerThickness 0.0015; //0.0015
-            //finalLayerThickness 0.5;
-            minThickness 0.001;
+            nSurfaceLayers 10;
+            expansionRatio 1.05;
+            finalLayerThickness 0.5;
+            //firstLayerThickness 0.1;
+            minThickness 0.0001;
         }
 
-        lowerWall
-        {
-            nSurfaceLayers 4;
-            expansionRatio 1.30;
-            firstLayerThickness 0.0025;
-            //finalLayerThickness 0.25;
-            minThickness 0.001;
-        }
     }
     nGrow 0;
     featureAngle 180; //180 is stock 130 from wolf try 1 from intel

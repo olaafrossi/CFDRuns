@@ -55,16 +55,6 @@ boundaryField
         type            calculated;
         value           uniform 0;
     }
-    Endplate_wall
-    {
-        type            calculated;
-        value           uniform 0;
-    }
-    Splitter_wall
-    {
-        type            calculated;
-        value           uniform 0;
-    }
 }
 
 
